@@ -1,6 +1,6 @@
 name: デフォコ
 image: image.bmp
-description: character.txt
+description: A port of Defoko/Utane Uta for the KaNe engine.
 pitch: c4
 jpn-ro:
     phonemes:
