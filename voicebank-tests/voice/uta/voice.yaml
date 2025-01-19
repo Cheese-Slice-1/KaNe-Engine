@@ -1,20 +1,18 @@
-name: uta
+name: デフォコ
 image: image.bmp
 description: character.txt
 pitch: c4
-jpn:
+jpn-ro:
     phonemes:
         a:
             source: あ.wav
-            offset: 6
-            consonant: 52
-            cutoff: 69
-            preutterance: 0
-            overlap: 0
+            offset: 6 #start of sample
+            consonant: 52 #consonant area
+            cutoff: 69 #end of sample
+            preutterance: 0 #consonant-vowel limit
         "*a":
             source: あ.wav
             offset: 16
             consonant: 52
             cutoff: 69
             preutterance: 26
-            overlap: 50
