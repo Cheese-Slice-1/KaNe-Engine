@@ -1,0 +1,14 @@
+<vbox style="padding: 5px;">
+    <style>
+        .button {
+            font-size: 20px;
+        }
+    </style>
+    <hbox>
+        <button text="Open KaNe File" id="openKaNeFile" style="color: green;" />
+    </hbox>
+    <vbox>
+        <label text="..." id="fileLabel" style="font-size: 20px;"/>
+        <textarea text="" id="fileTextArea"/>
+    </vbox>
+</vbox>
