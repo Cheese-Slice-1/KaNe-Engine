@@ -37,4 +37,5 @@ class MainView extends VBox {
         }
         dialog.show();
     }
+    
 }

@@ -5,10 +5,20 @@
         }
     </style>
     <hbox>
-        <button text="Open KaNe File" id="openKaNeFile" style="color: green;" />
+        <button id="openKaNeFile" text="Open KaNe File" style="color: green;" />
     </hbox>
     <vbox>
-        <label text="..." id="fileLabel" style="font-size: 20px;"/>
-        <textarea text="" id="fileTextArea"/>
+        <label id="fileLabel" text="..." style="font-size: 20px;"/>
+        <tab-view id="projectTableView" width="100%" height="100%" tabPosition="top" styleName="full-width-buttons">
+            <box id="fileBox" text="Project">
+                <textarea id="showFileTextArea" text="" width="100%" height="100%"/>
+            </box>
+            <box>
+                <scrollview>
+                    <textarea id="singerTextArea" text="" />
+                    <image id="singerImageView" imageScale=".8"/>
+                </scrollview>
+            </box>
+        </tab-view>
     </vbox>
 </vbox>
