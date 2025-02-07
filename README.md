@@ -2,7 +2,7 @@
 A simple, web-based voice synthesizer that works using only stylized (.kane.txt) text files.
 
 ## Porting/creating voices
-To port voices you must have your samples in WAV format, in the same directory as your singer's bitmap image and description. Then, you create a .yaml file in the same directory as the rest with this formatting:
+To port voices you must have your samples in WAV format, in the same directory as your singer's bitmap image and description. Then, you create a yaml file named "voice.yaml" the same directory as the rest with this formatting:
 
 ```yaml
 name: Singer's name
