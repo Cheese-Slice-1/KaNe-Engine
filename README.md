@@ -1,12 +1,12 @@
 # KaNe Engine
-A simple, similar-to-utau engine that works using only stylized (.kane.txt) text files.
+A simple, web-based voice synthesizer that works using only stylized (.kane.txt) text files.
 
 ## Porting/creating voices
 To port voices you must have your samples in WAV format, in the same directory as your singer's bitmap image and description. Then, you create a .yaml file in the same directory as the rest with this formatting:
 
 ```yaml
 name: Singer's name
-image: image.bmp
+image: image_name.bmp
 description: Your singer's description.
 pitch: c4 #change the pitch accordingly
 jpn-ro: #use this for romaji
@@ -23,7 +23,7 @@ jpn-ro: #use this for romaji
             consonant: 52
             cutoff: 69
             preutterance: 26
-jpn-ka:
+jpn-ka: #use this for kana (hiragana and katakana)
     phonemes:
         あ:
             source: source.wav
@@ -37,11 +37,12 @@ jpn-ka:
             consonant: 52
             cutoff: 69
             preutterance: 26
+#you can include other languages in the same style as jpn-ro and jpn-ka
 ```
 
-The best way to change the phonemes' configuration is to oto it in UTAU or another program and then copy the configurations from the _.oto_.
+The best way to know the phonemes' configuration is to OTO the voicebank in UTAU or another OTOing program, and then use the generated configurations.
 
-Keep in mind what do these configurations do:
+Keep in mind what each of the configurations mean:
 * source: the sample itself
 * offset: the start of the sample (useful when your sample has a silence at the start)
 * consonant: the consonant area, which isn't affected by the pitch

@@ -5,6 +5,7 @@ import haxe.ui.containers.dialogs.Dialogs.FileDialogTypes;
 import haxe.ui.containers.VBox;
 import haxe.ui.events.MouseEvent;
 import haxe.ui.containers.dialogs.OpenFileDialog;
+import Engine;
 
 
 @:build(haxe.ui.ComponentBuilder.build("assets/main-view.xml"))
@@ -14,7 +15,7 @@ class MainView extends VBox {
     }
     
     @:bind(openKaNeFile, MouseEvent.CLICK)
-    private function onMyButton(_) {
+    private function onKaNeButton(_) {
         var dialog = new OpenFileDialog();
         dialog.options = {
             readContents: true,
@@ -38,4 +39,8 @@ class MainView extends VBox {
         dialog.show();
     }
     
+    @:bind(btnC4, MouseEvent.CLICK)
+    private function onBtnC4(_) {
+        btnC4.text = Engine.play(Engine.Note.C(4));
+    }
 }

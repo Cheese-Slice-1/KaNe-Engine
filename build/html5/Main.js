@@ -87,6 +87,29 @@ EReg.prototype = {
 	}
 	,__class__: EReg
 };
+var Note = $hxEnums["Note"] = { __ename__:true,__constructs__:null
+	,A: ($_=function(o) { return {_hx_index:0,o:o,__enum__:"Note",toString:$estr}; },$_._hx_name="A",$_.__params__ = ["o"],$_)
+	,B: ($_=function(o) { return {_hx_index:1,o:o,__enum__:"Note",toString:$estr}; },$_._hx_name="B",$_.__params__ = ["o"],$_)
+	,C: ($_=function(o) { return {_hx_index:2,o:o,__enum__:"Note",toString:$estr}; },$_._hx_name="C",$_.__params__ = ["o"],$_)
+	,D: ($_=function(o) { return {_hx_index:3,o:o,__enum__:"Note",toString:$estr}; },$_._hx_name="D",$_.__params__ = ["o"],$_)
+	,E: ($_=function(o) { return {_hx_index:4,o:o,__enum__:"Note",toString:$estr}; },$_._hx_name="E",$_.__params__ = ["o"],$_)
+	,F: ($_=function(o) { return {_hx_index:5,o:o,__enum__:"Note",toString:$estr}; },$_._hx_name="F",$_.__params__ = ["o"],$_)
+	,G: ($_=function(o) { return {_hx_index:6,o:o,__enum__:"Note",toString:$estr}; },$_._hx_name="G",$_.__params__ = ["o"],$_)
+};
+Note.__constructs__ = [Note.A,Note.B,Note.C,Note.D,Note.E,Note.F,Note.G];
+var Engine = function() { };
+$hxClasses["Engine"] = Engine;
+Engine.__name__ = "Engine";
+Engine.play = function(note,sym) {
+	if(sym == null) {
+		sym = "a";
+	}
+	var noteStr = "C4 a";
+	if(note != null) {
+		noteStr = Std.string(note) + " " + sym;
+	}
+	return noteStr;
+};
 var HxOverrides = function() { };
 $hxClasses["HxOverrides"] = HxOverrides;
 HxOverrides.__name__ = "HxOverrides";
@@ -5164,55 +5187,64 @@ var MainView = function() {
 	c2.addComponent(c3);
 	var c4 = new haxe_ui_containers_TabView();
 	c4.set_id("projectTableView");
-	c4.set_percentWidth(100.);
-	c4.set_percentHeight(100.);
+	c4.set_width(1000.);
 	c4.set_styleNames("full-width-buttons");
-	c4.set_tabPosition("top");
+	c4.autoHeight = true;
 	var c5 = new haxe_ui_containers_Box();
-	c5.set_id("fileBox");
 	c5.set_text("Project");
-	var c6 = new haxe_ui_components_TextArea();
-	c6.set_id("showFileTextArea");
-	c6.set_percentWidth(100.);
-	c6.set_percentHeight(100.);
-	c6.set_text("");
+	var c6 = new haxe_ui_containers_ScrollView();
+	var c7 = new haxe_ui_components_TextArea();
+	c7.set_id("showFileTextArea");
+	c7.set_text("");
+	c6.addComponent(c7);
 	c5.addComponent(c6);
 	c4.addComponent(c5);
-	var c7 = new haxe_ui_containers_Box();
-	var c8 = new haxe_ui_containers_ScrollView();
-	var c9 = new haxe_ui_components_TextArea();
-	c9.set_id("singerTextArea");
-	c9.set_text("");
+	var c8 = new haxe_ui_containers_Box();
+	c8.set_text("Singer");
+	var c9 = new haxe_ui_containers_ScrollView();
+	var c10 = new haxe_ui_components_TextArea();
+	c10.set_id("singerTextArea");
+	c10.set_text("");
+	c9.addComponent(c10);
+	var c11 = new haxe_ui_components_Image();
+	c11.set_id("singerImageView");
+	c9.addComponent(c11);
 	c8.addComponent(c9);
-	var c10 = new haxe_ui_components_Image();
-	c10.set_id("singerImageView");
-	c10.set_imageScale(0.8);
-	c8.addComponent(c10);
-	c7.addComponent(c8);
-	c4.addComponent(c7);
+	c4.addComponent(c8);
 	c2.addComponent(c4);
 	this.addComponent(c2);
+	var c12 = new haxe_ui_components_Button();
+	c12.set_id("btnC4");
+	c12.set_text("C4");
+	c12.set_styleString("color: red; font-color: white;");
+	this.addComponent(c12);
 	this.set_styleString("padding: 5px;");
 	this.bindingRoot = true;
-	this.singerTextArea = c9;
-	this.singerImageView = c10;
-	this.showFileTextArea = c6;
+	this.singerTextArea = c10;
+	this.singerImageView = c11;
+	this.showFileTextArea = c7;
 	this.projectTableView = c4;
 	this.openKaNeFile = c1;
 	this.fileLabel = c3;
-	this.fileBox = c5;
+	this.btnC4 = c12;
 	var c = this.openKaNeFile;
 	if(c != null) {
-		c.registerEvent(haxe_ui_events_MouseEvent.CLICK,$bind(this,this.onMyButton));
+		c.registerEvent(haxe_ui_events_MouseEvent.CLICK,$bind(this,this.onKaNeButton));
 	} else {
-		haxe_Log.trace("WARNING: could not find event dispatcher to register event (" + "openKaNeFile" + ")",{ fileName : "src/MainView.hx", lineNumber : 16, className : "MainView", methodName : "new"});
+		haxe_Log.trace("WARNING: could not find event dispatcher to register event (" + "openKaNeFile" + ")",{ fileName : "src/MainView.hx", lineNumber : 17, className : "MainView", methodName : "new"});
+	}
+	var c = this.btnC4;
+	if(c != null) {
+		c.registerEvent(haxe_ui_events_MouseEvent.CLICK,$bind(this,this.onBtnC4));
+	} else {
+		haxe_Log.trace("WARNING: could not find event dispatcher to register event (" + "btnC4" + ")",{ fileName : "src/MainView.hx", lineNumber : 42, className : "MainView", methodName : "new"});
 	}
 };
 $hxClasses["MainView"] = MainView;
 MainView.__name__ = "MainView";
 MainView.__super__ = haxe_ui_containers_VBox;
 MainView.prototype = $extend(haxe_ui_containers_VBox.prototype,{
-	onMyButton: function(_) {
+	onKaNeButton: function(_) {
 		var _gthis = this;
 		var dialog = new haxe_ui_containers_dialogs_OpenFileDialog();
 		dialog.set_options({ readContents : true, title : "Open KaNe File", readAsBinary : true, extensions : haxe_ui_containers_dialogs_FileDialogTypes.get_TEXTS()});
@@ -5232,6 +5264,9 @@ MainView.prototype = $extend(haxe_ui_containers_VBox.prototype,{
 			}
 		};
 		dialog.show();
+	}
+	,onBtnC4: function(_) {
+		this.btnC4.set_text(Engine.play(Note.C(4)));
 	}
 	,registerBehaviours: function() {
 		haxe_ui_containers_VBox.prototype.registerBehaviours.call(this);
@@ -5259,7 +5294,7 @@ MainView.prototype = $extend(haxe_ui_containers_VBox.prototype,{
 	,projectTableView: null
 	,openKaNeFile: null
 	,fileLabel: null
-	,fileBox: null
+	,btnC4: null
 	,__class__: MainView
 });
 Math.__name__ = "Math";

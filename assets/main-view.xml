@@ -9,16 +9,19 @@
     </hbox>
     <vbox>
         <label id="fileLabel" text="..." style="font-size: 20px;"/>
-        <tab-view id="projectTableView" width="100%" height="100%" tabPosition="top" styleName="full-width-buttons">
-            <box id="fileBox" text="Project">
-                <textarea id="showFileTextArea" text="" width="100%" height="100%"/>
+        <tab-view id="projectTableView" width="1000" autoHeight="true" styleName="full-width-buttons">
+            <box text="Project">
+                <scrollview>
+                    <textarea id="showFileTextArea" text="" />
+                </scrollview>
             </box>
-            <box>
+            <box text="Singer">
                 <scrollview>
                     <textarea id="singerTextArea" text="" />
-                    <image id="singerImageView" imageScale=".8"/>
+                    <image id="singerImageView" />
                 </scrollview>
             </box>
         </tab-view>
     </vbox>
+    <button id="btnC4" text="C4" style="color: red; font-color: white;" />
 </vbox>
