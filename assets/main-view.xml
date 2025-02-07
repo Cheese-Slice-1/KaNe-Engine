@@ -3,21 +3,37 @@
         .button {
             font-size: 20px;
         }
+
+        #openKaNeFile {
+            color:green;
+        }
+
+        #fileLabel {
+            font-size: 20px;
+        }
+
+        #projectTabView {
+            display: flex;
+        }
+
+        #projectBox {
+            display: flex;
+        }
     </style>
     <hbox>
-        <button id="openKaNeFile" text="Open KaNe File" style="color: green;" />
+        <button id="openKaNeFile" text="Open KaNe File" />
     </hbox>
     <vbox>
-        <label id="fileLabel" text="..." style="font-size: 20px;"/>
-        <tab-view id="projectTableView" width="1000" autoHeight="true" styleName="full-width-buttons">
-            <box text="Project">
+        <label id="fileLabel" text="..." />
+        <tab-view id="projectTableView" autoWidth="true" autoHeight="true" styleName="full-width-buttons">
+            <box id="projectBox" text="Project">
                 <scrollview>
-                    <textarea id="showFileTextArea" text="" />
+                    <textarea id="showFileTextArea" text="" width="1000" />
                 </scrollview>
             </box>
-            <box text="Singer">
+            <box id="singerBox" text="Singer">
                 <scrollview>
-                    <textarea id="singerTextArea" text="" />
+                    <textarea id="singerTextArea" text="" width="1000" />
                     <image id="singerImageView" />
                 </scrollview>
             </box>

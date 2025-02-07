@@ -5171,39 +5171,41 @@ haxe_ui_containers_VBox.prototype = $extend(haxe_ui_containers_Box.prototype,{
 var MainView = function() {
 	var _gthis = this;
 	haxe_ui_containers_VBox.call(this);
-	haxe_ui_Toolkit.styleSheet.parse("\r\n        .button {\r\n            font-size: 20px;\r\n        }\r\n    ","user");
+	haxe_ui_Toolkit.styleSheet.parse("\r\n        .button {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #openKaNeFile {\r\n            color:green;\r\n        }\r\n\r\n        #fileLabel {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #projectTabView {\r\n            display: flex;\r\n        }\r\n\r\n        #projectBox {\r\n            display: flex;\r\n        }\r\n    ","user");
 	var c0 = new haxe_ui_containers_HBox();
 	var c1 = new haxe_ui_components_Button();
 	c1.set_id("openKaNeFile");
 	c1.set_text("Open KaNe File");
-	c1.set_styleString("color: green;");
 	c0.addComponent(c1);
 	this.addComponent(c0);
 	var c2 = new haxe_ui_containers_VBox();
 	var c3 = new haxe_ui_components_Label();
 	c3.set_id("fileLabel");
 	c3.set_text("...");
-	c3.set_styleString("font-size: 20px;");
 	c2.addComponent(c3);
 	var c4 = new haxe_ui_containers_TabView();
 	c4.set_id("projectTableView");
-	c4.set_width(1000.);
 	c4.set_styleNames("full-width-buttons");
+	c4.autoWidth = true;
 	c4.autoHeight = true;
 	var c5 = new haxe_ui_containers_Box();
+	c5.set_id("projectBox");
 	c5.set_text("Project");
 	var c6 = new haxe_ui_containers_ScrollView();
 	var c7 = new haxe_ui_components_TextArea();
 	c7.set_id("showFileTextArea");
+	c7.set_width(1000.);
 	c7.set_text("");
 	c6.addComponent(c7);
 	c5.addComponent(c6);
 	c4.addComponent(c5);
 	var c8 = new haxe_ui_containers_Box();
+	c8.set_id("singerBox");
 	c8.set_text("Singer");
 	var c9 = new haxe_ui_containers_ScrollView();
 	var c10 = new haxe_ui_components_TextArea();
 	c10.set_id("singerTextArea");
+	c10.set_width(1000.);
 	c10.set_text("");
 	c9.addComponent(c10);
 	var c11 = new haxe_ui_components_Image();
@@ -5222,8 +5224,10 @@ var MainView = function() {
 	this.bindingRoot = true;
 	this.singerTextArea = c10;
 	this.singerImageView = c11;
+	this.singerBox = c8;
 	this.showFileTextArea = c7;
 	this.projectTableView = c4;
+	this.projectBox = c5;
 	this.openKaNeFile = c1;
 	this.fileLabel = c3;
 	this.btnC4 = c12;
@@ -5249,18 +5253,18 @@ MainView.prototype = $extend(haxe_ui_containers_VBox.prototype,{
 		var dialog = new haxe_ui_containers_dialogs_OpenFileDialog();
 		dialog.set_options({ readContents : true, title : "Open KaNe File", readAsBinary : true, extensions : haxe_ui_containers_dialogs_FileDialogTypes.get_TEXTS()});
 		dialog.onDialogClosed = function(event) {
-			var file;
+			var fileName;
 			var lhs = event.button;
 			var larr = (lhs == null ? "null" : haxe_ui_containers_dialogs_DialogButton.toString(lhs)).split("|");
 			if(larr.indexOf("{{ok}}" == null ? "null" : haxe_ui_containers_dialogs_DialogButton.toString("{{ok}}")) != -1) {
-				file = dialog.selectedFiles[0].text.toString();
+				fileName = dialog.selectedFiles[0].name;
 			} else {
-				file = "...";
+				fileName = "...";
 			}
-			if(file == "undefined") {
+			if(fileName == "undefined") {
 				_gthis.fileLabel.set_text("Something went wrong...");
 			} else {
-				_gthis.fileLabel.set_text(file);
+				_gthis.fileLabel.set_text(fileName);
 			}
 		};
 		dialog.show();
@@ -5290,8 +5294,10 @@ MainView.prototype = $extend(haxe_ui_containers_VBox.prototype,{
 	}
 	,singerTextArea: null
 	,singerImageView: null
+	,singerBox: null
 	,showFileTextArea: null
 	,projectTableView: null
+	,projectBox: null
 	,openKaNeFile: null
 	,fileLabel: null
 	,btnC4: null

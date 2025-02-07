@@ -24,16 +24,16 @@ class MainView extends VBox {
             extensions: FileDialogTypes.TEXTS
         };
         dialog.onDialogClosed = function(event) {
-            var file: String;
+            var fileName: String;
             if (event.button == DialogButton.OK) {
-                file = (dialog.selectedFiles[0].text).toString();
+                fileName = dialog.selectedFiles[0].name;
             } else {
-                file = "...";
+                fileName = "...";
             }
-            if (file == "undefined") {
+            if (fileName == "undefined") {
                 fileLabel.text = "Something went wrong...";
             } else {
-                fileLabel.text = file;
+                fileLabel.text = fileName;
             }
         }
         dialog.show();
