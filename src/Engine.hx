@@ -13,6 +13,7 @@ enum Note {
 }
 
 class Engine {
+    // TODO: make it actually do something
     public static function play(note: Null<Note>, sym: String = "a"): String {
         var noteStr: String = "C4 a";
 
@@ -20,6 +21,6 @@ class Engine {
             noteStr = Std.string(note) + " " + sym;
         }
         
-        return noteStr;
+        return noteStr; // literally useless lmao
     }
 }
