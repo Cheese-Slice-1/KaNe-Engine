@@ -1,4 +1,4 @@
-# KaNe Engine
+# KaNe Engine (WIP)
 A simple, web-based voice synthesizer that works using only stylized (.kane.txt) text files.
 
 ## Porting/creating voices
