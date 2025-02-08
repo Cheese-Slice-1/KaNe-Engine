@@ -5,8 +5,11 @@
         }
 
         #openKaNeFile {
-            color:green;
+            color: green;
         }
+
+        #saveKaNeFile {
+            color: red;
 
         #fileLabel {
             font-size: 20px;
@@ -19,25 +22,32 @@
         #projectBox {
             display: flex;
         }
+
+        #btnC4
     </style>
     <hbox>
         <button id="openKaNeFile" text="Open KaNe File" />
+        <button id="saveKaNeFile" text="Save KaNe File" />
     </hbox>
     <vbox>
-        <label id="fileLabel" text="..." />
-        <tab-view id="projectTableView" autoWidth="true" autoHeight="true" styleName="full-width-buttons">
+        <label id="filename" text="..." />
+        <tab-view id="projectTabView" autoWidth="true" autoHeight="true" styleName="full-width-buttons">
             <box id="projectBox" text="Project">
                 <scrollview>
-                    <textarea id="showFileTextArea" text="" width="1000" />
+                    <textarea id="fileContent" text="" width="1000" height="450" />
                 </scrollview>
             </box>
             <box id="singerBox" text="Singer">
                 <scrollview>
-                    <textarea id="singerTextArea" text="" width="1000" />
-                    <image id="singerImageView" />
+                    <textarea id="singerDescription" text="" width="1000" height="450" />
+                    <image id="singerImage" />
                 </scrollview>
             </box>
         </tab-view>
     </vbox>
-    <button id="btnC4" text="C4" style="color: red; font-color: white;" />
+    <hbox>
+        <button id="btnC4" text="C4" style="color: red; font-color: white;" />
+        <button id="renderButton" text="Render" />
+        
+    </hbox>
 </vbox>

@@ -5,13 +5,13 @@ pitch: c4
 jpn-ro:
     phonemes:
         a:
-            source: あ.wav
-            offset: 6 #start of sample
-            consonant: 52 #consonant area
-            cutoff: 69 #end of sample
-            preutterance: 0 #consonant-vowel limit
+            source: あ.flac
+            offset: 6
+            consonant: 52
+            cutoff: 69
+            preutterance: 0
         "*a":
-            source: あ.wav
+            source: あ.flac
             offset: 16
             consonant: 52
             cutoff: 69

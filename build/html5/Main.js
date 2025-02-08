@@ -104,11 +104,55 @@ Engine.play = function(note,sym) {
 	if(sym == null) {
 		sym = "a";
 	}
-	var noteStr = "C4 a";
+	var noteStr = "C(4)A";
 	if(note != null) {
-		noteStr = Std.string(note) + " " + sym;
+		noteStr = Std.string(note) + sym.toUpperCase();
 	}
 	return noteStr;
+};
+Engine.loadAndPlayAudio = function(url,pitch) {
+	if(pitch == 0.0) {
+		return;
+	}
+	haxe_Log.trace("Loading audio from " + url + " with pitch " + pitch,{ fileName : "src/Engine.hx", lineNumber : 35, className : "Engine", methodName : "loadAndPlayAudio"});
+};
+Engine.getPitchFromNote = function(note) {
+	switch(note._hx_index) {
+	case 0:
+		var o = note.o;
+		var ret = 440.0000;
+		if(o == 4) {
+			return ret;
+		} else if(o < -1) {
+			return 0.0;
+		}
+		try {
+			ret /= Math.pow(2,4 - o);
+		} catch( _g ) {
+			var e = haxe_Exception.caught(_g);
+			haxe_Log.trace("Error: " + e.get_message(),{ fileName : "src/Engine.hx", lineNumber : 51, className : "Engine", methodName : "getPitchFromNote"});
+			return 0.0;
+		}
+		return ret;
+	case 1:
+		var o = note.o;
+		return 15.43;
+	case 2:
+		var o = note.o;
+		return 523.25;
+	case 3:
+		var o = note.o;
+		return 587.33;
+	case 4:
+		var o = note.o;
+		return 659.25;
+	case 5:
+		var o = note.o;
+		return 698.46;
+	case 6:
+		var o = note.o;
+		return 783.99;
+	}
 };
 var HxOverrides = function() { };
 $hxClasses["HxOverrides"] = HxOverrides;
@@ -5171,77 +5215,84 @@ haxe_ui_containers_VBox.prototype = $extend(haxe_ui_containers_Box.prototype,{
 var MainView = function() {
 	var _gthis = this;
 	haxe_ui_containers_VBox.call(this);
-	haxe_ui_Toolkit.styleSheet.parse("\r\n        .button {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #openKaNeFile {\r\n            color:green;\r\n        }\r\n\r\n        #fileLabel {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #projectTabView {\r\n            display: flex;\r\n        }\r\n\r\n        #projectBox {\r\n            display: flex;\r\n        }\r\n    ","user");
+	haxe_ui_Toolkit.styleSheet.parse("\r\n        .button {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #openKaNeFile {\r\n            color: green;\r\n        }\r\n\r\n        #saveKaNeFile {\r\n            color: red;\r\n\r\n        #fileLabel {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #projectTabView {\r\n            display: flex;\r\n        }\r\n\r\n        #projectBox {\r\n            display: flex;\r\n        }\r\n    ","user");
 	var c0 = new haxe_ui_containers_HBox();
 	var c1 = new haxe_ui_components_Button();
 	c1.set_id("openKaNeFile");
 	c1.set_text("Open KaNe File");
 	c0.addComponent(c1);
+	var c2 = new haxe_ui_components_Button();
+	c2.set_id("saveKaNeFile");
+	c2.set_text("Save KaNe File");
+	c0.addComponent(c2);
 	this.addComponent(c0);
-	var c2 = new haxe_ui_containers_VBox();
-	var c3 = new haxe_ui_components_Label();
-	c3.set_id("fileLabel");
-	c3.set_text("...");
-	c2.addComponent(c3);
-	var c4 = new haxe_ui_containers_TabView();
-	c4.set_id("projectTableView");
-	c4.set_styleNames("full-width-buttons");
-	c4.autoWidth = true;
-	c4.autoHeight = true;
-	var c5 = new haxe_ui_containers_Box();
-	c5.set_id("projectBox");
-	c5.set_text("Project");
-	var c6 = new haxe_ui_containers_ScrollView();
-	var c7 = new haxe_ui_components_TextArea();
-	c7.set_id("showFileTextArea");
-	c7.set_width(1000.);
-	c7.set_text("");
+	var c3 = new haxe_ui_containers_VBox();
+	var c4 = new haxe_ui_components_Label();
+	c4.set_id("filename");
+	c4.set_text("...");
+	c3.addComponent(c4);
+	var c5 = new haxe_ui_containers_TabView();
+	c5.set_id("projectTabView");
+	c5.set_styleNames("full-width-buttons");
+	c5.autoWidth = true;
+	c5.autoHeight = true;
+	var c6 = new haxe_ui_containers_Box();
+	c6.set_id("projectBox");
+	c6.set_text("Project");
+	var c7 = new haxe_ui_containers_ScrollView();
+	var c8 = new haxe_ui_components_TextArea();
+	c8.set_id("fileContent");
+	c8.set_width(1000.);
+	c8.set_height(450.);
+	c8.set_text("");
+	c7.addComponent(c8);
 	c6.addComponent(c7);
 	c5.addComponent(c6);
-	c4.addComponent(c5);
-	var c8 = new haxe_ui_containers_Box();
-	c8.set_id("singerBox");
-	c8.set_text("Singer");
-	var c9 = new haxe_ui_containers_ScrollView();
-	var c10 = new haxe_ui_components_TextArea();
-	c10.set_id("singerTextArea");
-	c10.set_width(1000.);
-	c10.set_text("");
+	var c9 = new haxe_ui_containers_Box();
+	c9.set_id("singerBox");
+	c9.set_text("Singer");
+	var c10 = new haxe_ui_containers_ScrollView();
+	var c11 = new haxe_ui_components_TextArea();
+	c11.set_id("singerDescription");
+	c11.set_width(1000.);
+	c11.set_height(450.);
+	c11.set_text("");
+	c10.addComponent(c11);
+	var c12 = new haxe_ui_components_Image();
+	c12.set_id("singerImage");
+	c10.addComponent(c12);
 	c9.addComponent(c10);
-	var c11 = new haxe_ui_components_Image();
-	c11.set_id("singerImageView");
-	c9.addComponent(c11);
-	c8.addComponent(c9);
-	c4.addComponent(c8);
-	c2.addComponent(c4);
-	this.addComponent(c2);
-	var c12 = new haxe_ui_components_Button();
-	c12.set_id("btnC4");
-	c12.set_text("C4");
-	c12.set_styleString("color: red; font-color: white;");
-	this.addComponent(c12);
+	c5.addComponent(c9);
+	c3.addComponent(c5);
+	this.addComponent(c3);
+	var c13 = new haxe_ui_components_Button();
+	c13.set_id("btnC4");
+	c13.set_text("C4");
+	c13.set_styleString("color: red; font-color: white;");
+	this.addComponent(c13);
 	this.set_styleString("padding: 5px;");
 	this.bindingRoot = true;
-	this.singerTextArea = c10;
-	this.singerImageView = c11;
-	this.singerBox = c8;
-	this.showFileTextArea = c7;
-	this.projectTableView = c4;
-	this.projectBox = c5;
+	this.singerImage = c12;
+	this.singerDescription = c11;
+	this.singerBox = c9;
+	this.saveKaNeFile = c2;
+	this.projectTabView = c5;
+	this.projectBox = c6;
 	this.openKaNeFile = c1;
-	this.fileLabel = c3;
-	this.btnC4 = c12;
+	this.filename = c4;
+	this.fileContent = c8;
+	this.btnC4 = c13;
 	var c = this.openKaNeFile;
 	if(c != null) {
 		c.registerEvent(haxe_ui_events_MouseEvent.CLICK,$bind(this,this.onKaNeButton));
 	} else {
-		haxe_Log.trace("WARNING: could not find event dispatcher to register event (" + "openKaNeFile" + ")",{ fileName : "src/MainView.hx", lineNumber : 17, className : "MainView", methodName : "new"});
+		haxe_Log.trace("WARNING: could not find event dispatcher to register event (" + "openKaNeFile" + ")",{ fileName : "src/MainView.hx", lineNumber : 19, className : "MainView", methodName : "new"});
 	}
 	var c = this.btnC4;
 	if(c != null) {
 		c.registerEvent(haxe_ui_events_MouseEvent.CLICK,$bind(this,this.onBtnC4));
 	} else {
-		haxe_Log.trace("WARNING: could not find event dispatcher to register event (" + "btnC4" + ")",{ fileName : "src/MainView.hx", lineNumber : 42, className : "MainView", methodName : "new"});
+		haxe_Log.trace("WARNING: could not find event dispatcher to register event (" + "btnC4" + ")",{ fileName : "src/MainView.hx", lineNumber : 33, className : "MainView", methodName : "new"});
 	}
 };
 $hxClasses["MainView"] = MainView;
@@ -5250,27 +5301,21 @@ MainView.__super__ = haxe_ui_containers_VBox;
 MainView.prototype = $extend(haxe_ui_containers_VBox.prototype,{
 	onKaNeButton: function(_) {
 		var _gthis = this;
-		var dialog = new haxe_ui_containers_dialogs_OpenFileDialog();
-		dialog.set_options({ readContents : true, title : "Open KaNe File", readAsBinary : true, extensions : haxe_ui_containers_dialogs_FileDialogTypes.get_TEXTS()});
-		dialog.onDialogClosed = function(event) {
-			var fileName;
-			var lhs = event.button;
-			var larr = (lhs == null ? "null" : haxe_ui_containers_dialogs_DialogButton.toString(lhs)).split("|");
+		haxe_ui_containers_dialogs_Dialogs.openFile(function(button,selectedFiles) {
+			var larr = (button == null ? "null" : haxe_ui_containers_dialogs_DialogButton.toString(button)).split("|");
 			if(larr.indexOf("{{ok}}" == null ? "null" : haxe_ui_containers_dialogs_DialogButton.toString("{{ok}}")) != -1) {
-				fileName = dialog.selectedFiles[0].name;
-			} else {
-				fileName = "...";
+				_gthis.updateProject(selectedFiles[0].name,selectedFiles[0].text);
 			}
-			if(fileName == "undefined") {
-				_gthis.fileLabel.set_text("Something went wrong...");
-			} else {
-				_gthis.fileLabel.set_text(fileName);
-			}
-		};
-		dialog.show();
+		},{ readContents : true, title : "Open KaNe File", readAsBinary : false, extensions : haxe_ui_containers_dialogs_FileDialogTypes.get_TEXTS()});
 	}
 	,onBtnC4: function(_) {
 		this.btnC4.set_text(Engine.play(Note.C(4)));
+	}
+	,updateProject: function(_name,_content) {
+		this.filename.set_text(_name);
+		this.fileContent.set_text(_content);
+	}
+	,updateSinger: function(_name,_descripiton,_image) {
 	}
 	,registerBehaviours: function() {
 		haxe_ui_containers_VBox.prototype.registerBehaviours.call(this);
@@ -5292,14 +5337,15 @@ MainView.prototype = $extend(haxe_ui_containers_VBox.prototype,{
 	,self: function() {
 		return new MainView();
 	}
-	,singerTextArea: null
-	,singerImageView: null
+	,singerImage: null
+	,singerDescription: null
 	,singerBox: null
-	,showFileTextArea: null
-	,projectTableView: null
+	,saveKaNeFile: null
+	,projectTabView: null
 	,projectBox: null
 	,openKaNeFile: null
-	,fileLabel: null
+	,filename: null
+	,fileContent: null
 	,btnC4: null
 	,__class__: MainView
 });
@@ -5576,6 +5622,15 @@ var haxe_Exception = function(message,previous,native) {
 };
 $hxClasses["haxe.Exception"] = haxe_Exception;
 haxe_Exception.__name__ = "haxe.Exception";
+haxe_Exception.caught = function(value) {
+	if(((value) instanceof haxe_Exception)) {
+		return value;
+	} else if(((value) instanceof Error)) {
+		return new haxe_Exception(value.message,null,value);
+	} else {
+		return new haxe_ValueException(value,null,value);
+	}
+};
 haxe_Exception.thrown = function(value) {
 	if(((value) instanceof haxe_Exception)) {
 		return value.get_native();
@@ -5591,11 +5646,14 @@ haxe_Exception.prototype = $extend(Error.prototype,{
 	__skipStack: null
 	,__nativeException: null
 	,__previousException: null
+	,get_message: function() {
+		return this.message;
+	}
 	,get_native: function() {
 		return this.__nativeException;
 	}
 	,__class__: haxe_Exception
-	,__properties__: {get_native:"get_native"}
+	,__properties__: {get_native:"get_native",get_message:"get_message"}
 });
 var haxe_Log = function() { };
 $hxClasses["haxe.Log"] = haxe_Log;
