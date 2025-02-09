@@ -55,3 +55,19 @@ Some reasons as to why I'll use the FLAC codec in this project:
 * The WebAudio API supports it, so it's very convenient for this project.
 * It's free and doesn't have licensing requirements.
 * Being a lossless codec, you can convert WAV files to FLAC files without loosing quality, which means you can port other synthesizer's (UTAU, DeepVocal, etc.) samples.
+
+## PROJECT FILES
+The standard KaNe project structure is:
+
+```
+4/4 1-16 120;
+咲音波;
+D4_F C4_8 C4_8;
+a a a;
+```
+
+What each line does:
+1. Project configuration (time signature, sections per beat, beats per minute; in order).
+2. Singer used (in this case it's Sain Wave).
+3. Notes to be played (formated as Note_Length; F is a full beat, the numbers are how many sections of a beat the note occupies). They can be in uppercase or lowercase.
+4. Lyrics to be played (these will be pitch accordingly to the note they correspond (lyric 1 - note 1, lyric 2 - note 2, etc.))

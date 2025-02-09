@@ -5215,73 +5215,92 @@ haxe_ui_containers_VBox.prototype = $extend(haxe_ui_containers_Box.prototype,{
 var MainView = function() {
 	var _gthis = this;
 	haxe_ui_containers_VBox.call(this);
-	haxe_ui_Toolkit.styleSheet.parse("\r\n        .button {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #openKaNeFile {\r\n            color: green;\r\n        }\r\n\r\n        #saveKaNeFile {\r\n            color: red;\r\n\r\n        #fileLabel {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #projectTabView {\r\n            display: flex;\r\n        }\r\n\r\n        #projectBox {\r\n            display: flex;\r\n        }\r\n    ","user");
-	var c0 = new haxe_ui_containers_HBox();
-	var c1 = new haxe_ui_components_Button();
-	c1.set_id("openKaNeFile");
-	c1.set_text("Open KaNe File");
-	c0.addComponent(c1);
+	haxe_ui_Toolkit.styleSheet.parse("\r\n        .button {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #openKaNeFile {\r\n            color: green;\r\n        }\r\n\r\n        #saveKaNeFile {\r\n            color: red;\r\n        }\r\n\r\n        #openSinger {\r\n            color: orange;\r\n        }\r\n\r\n        #playSingerDemo {\r\n            color: blue;\r\n        }\r\n\r\n        #fileLabel {\r\n            font-size: 20px;\r\n        }\r\n\r\n        #projectTabView {\r\n            display: flex;\r\n        }\r\n\r\n        #projectBox {\r\n            display: flex;\r\n        }\r\n\r\n        #btnC4\r\n    ","user");
+	var c0 = new haxe_ui_containers_VBox();
+	var c1 = new haxe_ui_containers_HBox();
 	var c2 = new haxe_ui_components_Button();
-	c2.set_id("saveKaNeFile");
-	c2.set_text("Save KaNe File");
-	c0.addComponent(c2);
+	c2.set_id("openKaNeFile");
+	c2.set_text("Open KaNe File");
+	c1.addComponent(c2);
+	var c3 = new haxe_ui_components_Button();
+	c3.set_id("saveKaNeFile");
+	c3.set_text("Save KaNe File");
+	c1.addComponent(c3);
+	var c4 = new haxe_ui_components_Button();
+	c4.set_id("openSinger");
+	c4.set_text("Open Singer ZIP");
+	c1.addComponent(c4);
+	var c5 = new haxe_ui_components_Button();
+	c5.set_id("playSingerDemo");
+	c5.set_text("Play Singer Demo");
+	c1.addComponent(c5);
+	c0.addComponent(c1);
 	this.addComponent(c0);
-	var c3 = new haxe_ui_containers_VBox();
-	var c4 = new haxe_ui_components_Label();
-	c4.set_id("filename");
-	c4.set_text("...");
-	c3.addComponent(c4);
-	var c5 = new haxe_ui_containers_TabView();
-	c5.set_id("projectTabView");
-	c5.set_styleNames("full-width-buttons");
-	c5.autoWidth = true;
-	c5.autoHeight = true;
-	var c6 = new haxe_ui_containers_Box();
-	c6.set_id("projectBox");
-	c6.set_text("Project");
-	var c7 = new haxe_ui_containers_ScrollView();
-	var c8 = new haxe_ui_components_TextArea();
-	c8.set_id("fileContent");
-	c8.set_width(1000.);
-	c8.set_height(450.);
-	c8.set_text("");
-	c7.addComponent(c8);
+	var c6 = new haxe_ui_containers_VBox();
+	var c7 = new haxe_ui_components_Label();
+	c7.set_id("filename");
+	c7.set_text("...");
 	c6.addComponent(c7);
-	c5.addComponent(c6);
+	var c8 = new haxe_ui_containers_TabView();
+	c8.set_id("projectTabView");
+	c8.set_styleNames("full-width-buttons");
+	c8.autoWidth = true;
+	c8.autoHeight = true;
 	var c9 = new haxe_ui_containers_Box();
-	c9.set_id("singerBox");
-	c9.set_text("Singer");
+	c9.set_id("projectBox");
+	c9.set_text("Project");
 	var c10 = new haxe_ui_containers_ScrollView();
 	var c11 = new haxe_ui_components_TextArea();
-	c11.set_id("singerDescription");
+	c11.set_id("fileContent");
 	c11.set_width(1000.);
 	c11.set_height(450.);
 	c11.set_text("");
 	c10.addComponent(c11);
-	var c12 = new haxe_ui_components_Image();
-	c12.set_id("singerImage");
-	c10.addComponent(c12);
 	c9.addComponent(c10);
-	c5.addComponent(c9);
-	c3.addComponent(c5);
-	this.addComponent(c3);
-	var c13 = new haxe_ui_components_Button();
-	c13.set_id("btnC4");
-	c13.set_text("C4");
-	c13.set_styleString("color: red; font-color: white;");
-	this.addComponent(c13);
+	c8.addComponent(c9);
+	var c12 = new haxe_ui_containers_Box();
+	c12.set_id("singerBox");
+	c12.set_text("Singer");
+	var c13 = new haxe_ui_containers_ScrollView();
+	var c14 = new haxe_ui_components_TextArea();
+	c14.set_id("singerDescription");
+	c14.set_width(1000.);
+	c14.set_height(450.);
+	c14.set_text("");
+	c13.addComponent(c14);
+	var c15 = new haxe_ui_components_Image();
+	c15.set_id("singerImage");
+	c13.addComponent(c15);
+	c12.addComponent(c13);
+	c8.addComponent(c12);
+	c6.addComponent(c8);
+	this.addComponent(c6);
+	var c16 = new haxe_ui_containers_HBox();
+	var c17 = new haxe_ui_components_Button();
+	c17.set_id("btnC4");
+	c17.set_text("C4");
+	c17.set_styleString("color: red; font-color: white;");
+	c16.addComponent(c17);
+	var c18 = new haxe_ui_components_Button();
+	c18.set_id("renderButton");
+	c18.set_text("Render");
+	c16.addComponent(c18);
+	this.addComponent(c16);
 	this.set_styleString("padding: 5px;");
 	this.bindingRoot = true;
-	this.singerImage = c12;
-	this.singerDescription = c11;
-	this.singerBox = c9;
-	this.saveKaNeFile = c2;
-	this.projectTabView = c5;
-	this.projectBox = c6;
-	this.openKaNeFile = c1;
-	this.filename = c4;
-	this.fileContent = c8;
-	this.btnC4 = c13;
+	this.singerImage = c15;
+	this.singerDescription = c14;
+	this.singerBox = c12;
+	this.saveKaNeFile = c3;
+	this.renderButton = c18;
+	this.projectTabView = c8;
+	this.projectBox = c9;
+	this.playSingerDemo = c5;
+	this.openSinger = c4;
+	this.openKaNeFile = c2;
+	this.filename = c7;
+	this.fileContent = c11;
+	this.btnC4 = c17;
 	var c = this.openKaNeFile;
 	if(c != null) {
 		c.registerEvent(haxe_ui_events_MouseEvent.CLICK,$bind(this,this.onKaNeButton));
@@ -5341,8 +5360,11 @@ MainView.prototype = $extend(haxe_ui_containers_VBox.prototype,{
 	,singerDescription: null
 	,singerBox: null
 	,saveKaNeFile: null
+	,renderButton: null
 	,projectTabView: null
 	,projectBox: null
+	,playSingerDemo: null
+	,openSinger: null
 	,openKaNeFile: null
 	,filename: null
 	,fileContent: null

@@ -10,6 +10,15 @@
 
         #saveKaNeFile {
             color: red;
+        }
+
+        #openSinger {
+            color: orange;
+        }
+
+        #playSingerDemo {
+            color: blue;
+        }
 
         #fileLabel {
             font-size: 20px;
@@ -25,10 +34,14 @@
 
         #btnC4
     </style>
-    <hbox>
-        <button id="openKaNeFile" text="Open KaNe File" />
-        <button id="saveKaNeFile" text="Save KaNe File" />
-    </hbox>
+    <vbox>
+        <hbox>
+            <button id="openKaNeFile" text="Open KaNe File" />
+            <button id="saveKaNeFile" text="Save KaNe File" />
+            <button id="openSinger" text="Open Singer ZIP" />
+            <button id="playSingerDemo" text="Play Singer Demo" />            
+        </hbox>
+    </vbox>
     <vbox>
         <label id="filename" text="..." />
         <tab-view id="projectTabView" autoWidth="true" autoHeight="true" styleName="full-width-buttons">
@@ -48,6 +61,5 @@
     <hbox>
         <button id="btnC4" text="C4" style="color: red; font-color: white;" />
         <button id="renderButton" text="Render" />
-        
     </hbox>
 </vbox>
