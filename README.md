@@ -40,6 +40,8 @@ jpn-ka: #use this for kana (hiragana and katakana)
 #you can include other languages in the same style as jpn-ro and jpn-ka
 ```
 
+Then, you compress the folder into a **ZIP** file and in the app, open it. As for now, only ZIP files are supported, so be careful.
+
 The best way to know the phonemes' configuration is to OTO the voicebank in UTAU or another OTOing program, and then use the generated configurations.
 
 Keep in mind what each of the configurations mean:
@@ -61,7 +63,7 @@ The standard KaNe project structure is:
 
 ```
 4/4 1-16 120;
-咲音波;
+Singer Name;
 D4_F C4_8 C4_8;
 a a a;
 ```
@@ -71,3 +73,5 @@ What each line does:
 2. Singer used (in this case it's Sain Wave).
 3. Notes to be played (formated as Note_Length; F is a full beat, the numbers are how many sections of a beat the note occupies). They can be in uppercase or lowercase.
 4. Lyrics to be played (these will be pitch accordingly to the note they correspond (lyric 1 - note 1, lyric 2 - note 2, etc.))
+
+As you're able to upload more than one singer at a time, it's useful to specify the singer in te project file.

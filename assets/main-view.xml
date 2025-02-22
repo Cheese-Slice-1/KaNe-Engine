@@ -32,8 +32,12 @@
             display: flex;
         }
 
-        #btnC4
+        #btnC4 {
+            color: red;
+            font-color: white;
+        }
     </style>
+    
     <vbox>
         <hbox>
             <button id="openKaNeFile" text="Open KaNe File" />
@@ -44,6 +48,7 @@
     </vbox>
     <vbox>
         <label id="filename" text="..." />
+        <label id="filePath" text="..." />
         <tab-view id="projectTabView" autoWidth="true" autoHeight="true" styleName="full-width-buttons">
             <box id="projectBox" text="Project">
                 <scrollview>
@@ -59,7 +64,8 @@
         </tab-view>
     </vbox>
     <hbox>
-        <button id="btnC4" text="C4" style="color: red; font-color: white;" />
+        <button id="testSinger" text="Use Test Singer"/>
         <button id="renderButton" text="Render" />
+        <button id="btnC4" text="C4" />
     </hbox>
 </vbox>
