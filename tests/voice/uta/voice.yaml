@@ -1,4 +1,7 @@
-name: デフォ子
+name: 
+    jpn: デフォ子
+    lat: defoko
+    cyr: 
 image: image.bmp
 description: A port of Defoko/Utane Uta for the KaNe engine.
 pitch: c4

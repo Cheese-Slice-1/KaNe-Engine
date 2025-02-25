@@ -10,7 +10,8 @@ import yaml.Yaml;
 import openfl.filesystem.File;
 import openfl.filesystem.FileMode;
 
-import Engine;
+import engine.Engine;
+import engine.Engine.Note;
 
 @:build(haxe.ui.ComponentBuilder.build("assets/main-view.xml"))
 class MainView extends VBox {    
@@ -51,7 +52,11 @@ class MainView extends VBox {
     
     @:bind(btnC4, MouseEvent.CLICK)
     private function onBtnC4(_) {
-        btnC4.text = Engine.play(Engine.Note.C(4));
+        try {
+            btnC4.text = eng.play(Note.C(4));
+        } catch(e) {
+            
+        }
     }
 
     private function updateProject(_name: String, _content: String) {

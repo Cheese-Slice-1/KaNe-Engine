@@ -47,7 +47,7 @@ typedef SingerData = {
 
 class Engine {
     var tempo: Int;
-    var timeSignature: {number: Int, type: Int}; // 4/4 four wuarter notes, 4/8 four eighth notes, etc.
+    var timeSignature: {number: Int, type: Int}; // 4/4 four quarter notes, 4/8 four eighth notes, etc.
 
     public function new(_tempo: Int, _timeSignature: {number: Int, type: Int}) {
         tempo = _tempo;
