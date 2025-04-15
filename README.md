@@ -1,43 +1,44 @@
 # The KaNe (歌音) Engine \[WIP]
-A simple, web-based voice synthesizer that works using stylized (.kane.txt) text files.
+A simple comand line voice synthesizer that works using stylized (.kane) text files.
 
 ## Porting/creating voices
 To port/create voices you must have your samples in FLAC format and in the same directory as your singer's bitmap image. Then, you create a yaml file named "voice.yaml" in the same directory as the rest with this formatting:
 
 ```yaml
 name: Singer's name
-image: image_name.bmp
+image: image_name.bmp # can be .bpm, .png, .jpg
 description: Your singer's description.
-pitch: c4 #change the pitch accordingly
-jpn-ro: #use this for romaji
+pitch: c4 # change the pitch accordingly
+jpn-ro: # use this for romaji
     phonemes:
-        a: #alias
+        "a": # alias
             source: source.flac #sample name
             offset: 6 #start of sample
             consonant: 52 #consonant area
             cutoff: 69 #end of sample
             preutterance: 0 #consonant-vowel limit
+            #color: [normal, ""] #optional color in lowercase; default is "normal"
         "*a":
             source: source.flac
             offset: 16
             consonant: 52
             cutoff: 69
             preutterance: 26
-jpn-ka: #use this for kana (hiragana and katakana)
+jpn-ka: # use this for kana (hiragana and katakana)
     phonemes:
-        あ:
+        "あ":
             source: source.flac
             offset: 6
             consonant: 52
             cutoff: 69
             preutterance: 0
-        ＊あ:
+        "＊あ":
             source: source.flac
             offset: 16
             consonant: 52
             cutoff: 69
             preutterance: 26
-#you can include other languages in the same style as jpn-ro and jpn-ka
+# you can include other languages in the same style as jpn-ro and jpn-ka
 ```
 
 Then, you compress the folder into a **ZIP** file and in the app, open it. As for now, only ZIP files are supported, so be careful.
