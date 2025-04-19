@@ -13,30 +13,31 @@ jpn-ro: # use this for romaji
     phonemes:
         "a": # alias
             source: source.flac #sample name
-            offset: 6 #start of sample
+            start: 6 #start of sample
             consonant: 52 #consonant area
-            cutoff: 69 #end of sample
+            end: 69 #end of sample
             preutterance: 0 #consonant-vowel limit
-            #color: [normal, ""] #optional color in lowercase; default is "normal"
+            #color: [normal, ""]
+            #^ optional color in lowercase, default is "normal"; second argument is the suffix, default is ""
         "*a":
             source: source.flac
-            offset: 16
+            start: 16
             consonant: 52
-            cutoff: 69
+            end: 69
             preutterance: 26
 jpn-ka: # use this for kana (hiragana and katakana)
     phonemes:
         "あ":
             source: source.flac
-            offset: 6
+            start: 6
             consonant: 52
-            cutoff: 69
+            end: 69
             preutterance: 0
         "＊あ":
             source: source.flac
-            offset: 16
+            start: 16
             consonant: 52
-            cutoff: 69
+            end: 69
             preutterance: 26
 # you can include other languages in the same style as jpn-ro and jpn-ka
 ```
@@ -47,9 +48,9 @@ The best way to know the phonemes' configuration is to OTO the voicebank in UTAU
 
 Keep in mind what each of the configurations mean:
 * source: the sample itself.
-* offset: the start of the sample (useful when your sample has a silence at the start).
-* consonant: the consonant area, which isn't affected by the pitch.
-* cutoff: the end of the sample (useful when your sample has a silence at the end).
+* start: the start of the sample (useful when your sample has silence or noise at the start).
+* consonant: the limit of consonant area, which isn't affected by the pitch.
+* end: the end of the sample (useful when your sample has silence or noise at the end).
 * preutterance: the limit between the cononant and vowel areas, where the pitch does affect.
 
 ## Why FLAC?
