@@ -47,26 +47,16 @@ Then, you compress the folder into a **ZIP** file and in the app, open it. As fo
 When installing it, the program will automatically uncompress the singer into the "voice" foler, locatde in the program's directory.
 
 As fro configuratoion, the best way to know the phonemes' settings is to OTO the voicebank in UTAU or another OTOing program, and then use the generated *oto.ini*'s properties.
+When installing it, the program will automatically uncompress the singer into the "voice" foler, locatde in the program's directory.
+
+As fro configuratoion, the best way to know the phonemes' settings is to OTO the voicebank in UTAU or another OTOing program, and then use the generated *oto.ini*'s properties.
 
 Keep in mind what each of the configurations mean:
 * source: the sample itself.
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-* start: the start of the sample (useful when your sample has silence or noise at the start).
-* consonant: the limit of consonant area, which isn't affected by the pitch.
-* end: the end of the sample (useful when your sample has silence or noise at the end).
-* preutterance: the limit between the cononant and vowel areas, where the pitch does affect.
-=======
-=======
->>>>>>> Stashed changes
 * start: the start of the sample (useful when your sample has a silence at the start).
 * consonant: the consonant area, which isn't affected by the pitch.
 * end: the end of the sample (useful when your sample has a silence at the end).
 * vowel: the limit between the cononant and vowel areas, where the pitch does affect.
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 ## Why FLAC?
 Some reasons as to why I'll use the FLAC codec in this project:
