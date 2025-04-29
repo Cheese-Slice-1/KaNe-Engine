@@ -44,21 +44,29 @@ jpn-ka: # use this for kana (hiragana and katakana)
 
 Then, you compress the folder into a **ZIP** file and in the app, open it. As for now, only ZIP files are supported, so be careful.
 
-The best way to know the phonemes' configuration is to OTO the voicebank in UTAU or another OTOing program, and then use the generated configurations.
+When installing it, the program will automatically uncompress the singer into the "voice" foler, locatde in the program's directory.
+
+As fro configuratoion, the best way to know the phonemes' settings is to OTO the voicebank in UTAU or another OTOing program, and then use the generated *oto.ini*'s properties.
 
 Keep in mind what each of the configurations mean:
 * source: the sample itself.
+<<<<<<< Updated upstream
 * start: the start of the sample (useful when your sample has silence or noise at the start).
 * consonant: the limit of consonant area, which isn't affected by the pitch.
 * end: the end of the sample (useful when your sample has silence or noise at the end).
 * preutterance: the limit between the cononant and vowel areas, where the pitch does affect.
+=======
+* start: the start of the sample (useful when your sample has a silence at the start).
+* consonant: the consonant area, which isn't affected by the pitch.
+* end: the end of the sample (useful when your sample has a silence at the end).
+* vowel: the limit between the cononant and vowel areas, where the pitch does affect.
+>>>>>>> Stashed changes
 
 ## Why FLAC?
 Some reasons as to why I'll use the FLAC codec in this project:
 * It's pretty light (in terms of lossless codecs).
-* The WebAudio API supports it, so it's very convenient for this project.
 * It's free and doesn't have licensing requirements.
-* Being a lossless codec, you can convert WAV files to FLAC files without loosing quality, which means you can port other synthesizer's (UTAU, DeepVocal, etc.) samples.
+* Being a lossless codec, decoding it returns a WAV file with the same quality.
 
 ## PROJECT FILES
 The standard KaNe project structure is:
@@ -72,8 +80,6 @@ a a a;
 
 What each line does:
 1. Project configuration (time signature, sections per beat, beats per minute; in order).
-2. Singer used (in this case it's Sain Wave).
+2. Singer used.
 3. Notes to be played (formated as Note_Length; F is a full beat, the numbers are how many sections of a beat the note occupies). They can be in uppercase or lowercase.
 4. Lyrics to be played (these will be pitch accordingly to the note they correspond (lyric 1 - note 1, lyric 2 - note 2, etc.))
-
-As you're able to upload more than one singer at a time, it's useful to specify the singer in te project file.

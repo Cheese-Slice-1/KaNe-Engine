@@ -1,5 +1,6 @@
 package ;
 
+// import js.html.Blob;
 import haxe.ui.containers.VBox;
 import haxe.io.Bytes;
 import haxe.ui.containers.dialogs.Dialogs;
@@ -7,15 +8,22 @@ import haxe.ui.containers.dialogs.Dialog.DialogButton;
 import haxe.ui.containers.dialogs.Dialogs.FileDialogTypes;
 import haxe.ui.events.MouseEvent;
 import yaml.Yaml;
-import openfl.filesystem.File;
-import openfl.filesystem.FileMode;
+import sys.io.File;
+import sys.FileSystem;
+import haxe.zip.Reader;
+import haxe.zip.Entry;
+import haxe.zip.Uncompress;
+import cs.system.io.File;
+// import js.html.File;
+// import js.html.ArrayBuffer;
 
 import engine.Engine;
-import engine.Engine.Note;
+import engine.parts.Pitcher.Note;
 
 @:build(haxe.ui.ComponentBuilder.build("assets/main-view.xml"))
 class MainView extends VBox {    
     var eng: Engine;
+    var singer: List<Entry>;
 
     public function new() {
         super();
@@ -41,10 +49,11 @@ class MainView extends VBox {
         Dialogs.openFile(function(button, selectedFiles) {
             if (button == DialogButton.OK) {
                 updateSinger(null, null, null);
+                singer = Reader.readZip(selectedFiles[0].data);
             }
         }, {
             readContents: true,
-            title: "Open Singer's YAML File",
+            title: "Open Singer's ZIP File",
             readAsBinary: true,
             extensions: FileDialogTypes.ANY
         });
