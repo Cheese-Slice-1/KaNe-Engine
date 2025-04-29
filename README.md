@@ -51,15 +51,21 @@ As fro configuratoion, the best way to know the phonemes' settings is to OTO the
 Keep in mind what each of the configurations mean:
 * source: the sample itself.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 * start: the start of the sample (useful when your sample has silence or noise at the start).
 * consonant: the limit of consonant area, which isn't affected by the pitch.
 * end: the end of the sample (useful when your sample has silence or noise at the end).
 * preutterance: the limit between the cononant and vowel areas, where the pitch does affect.
 =======
+=======
+>>>>>>> Stashed changes
 * start: the start of the sample (useful when your sample has a silence at the start).
 * consonant: the consonant area, which isn't affected by the pitch.
 * end: the end of the sample (useful when your sample has a silence at the end).
 * vowel: the limit between the cononant and vowel areas, where the pitch does affect.
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 ## Why FLAC?
