@@ -17,7 +17,7 @@ import (
 	defoko;
 	R:F, a:D4:F, a:C4:16-8, a:E4:16-8;
 
-	analizado:
+	devuelve:
 	[][]string{
 		[]string{"4/4", "120", "jpn-ro"},
 		[]string{"defoko"},
