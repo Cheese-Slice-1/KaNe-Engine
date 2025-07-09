@@ -1,17 +1,17 @@
 package parts
 
 import (
-	. "fmt"
+	"fmt"
 	// "os"
-	. "strings"
 	"errors"
+	"strings"
 )
 
 /*
 	esta función analiza y separa el documento en declaraciones
 
 	ejemplo:
-	
+
 	archivo:
 	4/4, 120, jpn-ro;
 	defoko;
@@ -28,52 +28,109 @@ import (
 func ParseFile(content string) ([][]string, error) {
 	fmt.Println("Parsing file content...")
 
-	lines := Split(content, ";")
+	if !strings.ContainsAny(content, ";,") {
+		return nil, errors.New("Project file isn't properly formatted, it lacks semicolons (;) and commas (,)")
+	}
+
+	lines := strings.Split(content, ";")
 
 	var parsedLines [][]string
-
+	
 	for _, line := range lines {
-		declarations := Split(line, ",")
+		declarations := strings.Split(line, ",")
 		for i, declaration := range declarations {
-			declarations[i] = TrimSpace(declaration) // ej: ["4/4", " 120", " jpn-ro"] --> ["4/4", "120", "jpn-ro"]
+			declarations[i] = strings.TrimSpace(declaration) // ej: ["4/4", " 120", " jpn-ro"] --> ["4/4", "120", "jpn-ro"]
 		}
 		parsedLines = append(parsedLines, declarations)
 	}
 
 	if len(parsedLines) > 3  {
-		return parsedLines, errors.New("Error: The file must contain 3 lines, but currently has " + fmt.Sprint(len(parsedLines)))
+		return parsedLines, fmt.Errorf("Project file must contain 3 lines or less, but currently has %v", len(parsedLines))
 	}
 
-	return parsedLines, checkContent(parsedLines)
+	err := checkContent(parsedLines)
+
+	if err != nil {
+		return parsedLines, err
+	}
+
+	fmt.Println("File content parsed successfully!")
+
+	return parsedLines, nil
 }
 
 func checkContent(content [][]string) error {
 	errorsFound := []string{}
 	
 	for i, line := range content {
-
-		// C4:F, :F, :16-8, r:f/R:F
+		// C4:F, :F, :16-8, r:f/R:F :f2/:F2 C516-8 C4:
 		switch i {
 		case 0:
-			if len(line) < 3 {
+			fmt.Println("Analising line 1...")
+
+			if len(line) < 3 || len(line) > 3 {
 				errorsFound = append(errorsFound, "Line 1 must contain at least 3 elements (time signature, BPM, and language)")
+				continue
+			}
+
+			for j, option := range line {
+				switch j {
+				case 0:
+					if !strings.ContainsAny(option, "0123456789") && !strings.Contains(option, ":") {
+						errorsFound = append(errorsFound, fmt.Sprintf("Option %v at line 1 isn't a valid time signature", j+1))
+					}
+				case 1:
+					if !strings.ContainsAny(option, "0123456789") && option != "0" {
+						errorsFound = append(errorsFound, fmt.Sprintf("Option %v at line 1 isn't a valid BPM mark", j+1))
+					}
+				case 3:
+					if !true {
+
+					}
+				}
 			}
 		case 1:
-			if len(line) < 1 {
-				errorsFound = append(errorsFound, "Line 2 must only contain the singer's name")
+			if len(line) > 1 || len(line) < 1 {
+				errorsFound = append(errorsFound, "Line 2 must contain the singer's name and no commas (,)")
+			} else if line[0] != "" || line[0] != strings.TrimSpace(line[0]) {
+				errorsFound = append(errorsFound, "Line 2 lacks singer declaration.")
 			}
 		case 2:
-			for i, declaration := range line {
-				if !ContainsAny(declaration, ":") && ContainsAny(declaration, "0123456789F") {
-					errorsFound = append(errorsFound, Sprintf("Note %d at line 3 lacks either a separator (:) between note name and duration, or both separator (:) and note duration", i+1))
-				} else if ContainsAny(declaration, ":") && !ContainsAny(declaration, "0123456789Ff") {
-					errorsFound = append(errorsFound, Sprintf("Note %d at line 3 has a separator (:) but no note duration", i+1))
-				} else if !ContainsAny(declaration, "ABCDEFRabcdefr") {
+			/*
+				una nota deberia ser un nombre, dos puntos y una duración
+				si no hay letras (a-g) da error
+				si no hay dos puntos da error
+				si no hay números da error
+			*/
 
+			if len(line) < 1 {
+				continue
+			}
+
+			fmt.Println("Analising line 3...")
+
+			for j, note := range line {
+				fmt.Printf("Analysing note %v of %v...\t", j+1, len(line))
+
+				if !strings.Contains(note, ":") {
+					errorsFound = append(errorsFound, fmt.Sprintf("Note %v lacks a separator", j+1))
 				}
+					
+				if !strings.ContainsAny(note, "ABCDEFGRabcdefgr0123456789") {
+					if !strings.Contains(note, "R:F") || !strings.Contains(note, "r:f") || !strings.Contains(note, "R:f") || !strings.Contains(note, "r:F") {
+						errorsFound = append(errorsFound, fmt.Sprintf("Note %v lacks either note name or length", j+1))
+					}
+				}
+
+				fmt.Print("Finished\n")
 			}
 		}
 	}
-	
-	return fmt.Errorf("%d error(s) found:\n- %s", len(errorsFound), Join(errorsFound, "\n- "))
+
+	// si hay errores formatearlos
+	if len(errorsFound) > 0 {
+		return fmt.Errorf("%v error(s) found:\n- %v", len(errorsFound), strings.Join(errorsFound, "\n- "))
+	}
+
+	return nil
 }
