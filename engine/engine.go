@@ -5,9 +5,24 @@ import (
 	// "os"
 	"engine/parts"
 	"strings"
+	// "github.com/go-mix/mix"
+	// "github.com/mewkiz/flac"
 )
 
-func Run(project string, options []string, singerLocations []string) error {
+type NoteType int
+
+const (
+	HalfNote NoteType = 2
+	QuarterNote NoteType = 4
+	EighthNote NoteType = 8
+)
+
+type Signature struct {
+	numerator int
+	denominator NoteType
+}
+
+func Run(project string, singerLocations []string) error {
 	//parse the project file
 	
 	parsedProject, err := parts.ParseFile(project)

@@ -5,6 +5,7 @@ import (
 	// "os"
 	"errors"
 	"strings"
+	"engine"
 )
 
 /*
@@ -37,9 +38,11 @@ func ParseFile(content string) ([][]string, error) {
 	var parsedLines [][]string
 	
 	for _, line := range lines {
+		if line == "" { continue }
+
 		declarations := strings.Split(line, ",")
-		for i, declaration := range declarations {
-			declarations[i] = strings.TrimSpace(declaration) // ej: ["4/4", " 120", " jpn-ro"] --> ["4/4", "120", "jpn-ro"]
+		for j, declaration := range declarations {
+			declarations[j] = strings.TrimSpace(declaration) // ej: ["4/4", " 120", " jpn-ro"] --> ["4/4", "120", "jpn-ro"]
 		}
 		parsedLines = append(parsedLines, declarations)
 	}
@@ -66,7 +69,7 @@ func checkContent(content [][]string) error {
 		// C4:F, :F, :16-8, r:f/R:F :f2/:F2 C516-8 C4:
 		switch i {
 		case 0:
-			fmt.Println("Analising line 1...")
+			fmt.Println("Analysing line 1...")
 
 			if len(line) < 3 || len(line) > 3 {
 				errorsFound = append(errorsFound, "Line 1 must contain at least 3 elements (time signature, BPM, and language)")
@@ -89,10 +92,14 @@ func checkContent(content [][]string) error {
 					}
 				}
 			}
+
+			fmt.Println("End of line 1 analysis")
 		case 1:
+			fmt.Println("Analysing line 2...")
+
 			if len(line) > 1 || len(line) < 1 {
 				errorsFound = append(errorsFound, "Line 2 must contain the singer's name and no commas (,)")
-			} else if line[0] != "" || line[0] != strings.TrimSpace(line[0]) {
+			} else if line[0] == "" || line[0] == strings.TrimSpace(line[0]) {
 				errorsFound = append(errorsFound, "Line 2 lacks singer declaration.")
 			}
 		case 2:
@@ -107,7 +114,7 @@ func checkContent(content [][]string) error {
 				continue
 			}
 
-			fmt.Println("Analising line 3...")
+			fmt.Println("Analysing line 3...")
 
 			for j, note := range line {
 				fmt.Printf("Analysing note %v of %v...\t", j+1, len(line))
@@ -124,6 +131,8 @@ func checkContent(content [][]string) error {
 
 				fmt.Print("Finished\n")
 			}
+
+			fmt.Println("End of line 3 analysis")
 		}
 	}
 
@@ -133,4 +142,8 @@ func checkContent(content [][]string) error {
 	}
 
 	return nil
+}
+
+func toTicks480(noteLength float64, signature engine.Signature) float64 {
+	return 
 }
