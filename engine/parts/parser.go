@@ -5,8 +5,20 @@ import (
 	// "os"
 	"errors"
 	"strings"
-	"engine"
 )
+
+type NoteType int
+
+const (
+	HalfNote NoteType = 2
+	QuarterNote NoteType = 4
+	EighthNote NoteType = 8
+)
+
+type Signature struct {
+	numerator int
+	denominator NoteType
+}
 
 /*
 	esta función analiza y separa el documento en declaraciones
@@ -30,7 +42,7 @@ func ParseFile(content string) ([][]string, error) {
 	fmt.Println("Parsing file content...")
 
 	if !strings.ContainsAny(content, ";,") {
-		return nil, errors.New("Project file isn't properly formatted, it lacks semicolons (;) and commas (,)")
+		return nil, errors.New("project file isn't properly formatted, it lacks semicolons (;) and commas (,)")
 	}
 
 	lines := strings.Split(content, ";")
@@ -48,7 +60,7 @@ func ParseFile(content string) ([][]string, error) {
 	}
 
 	if len(parsedLines) > 3  {
-		return parsedLines, fmt.Errorf("Project file must contain 3 lines or less, but currently has %v", len(parsedLines))
+		return parsedLines, fmt.Errorf("project file must contain 3 lines or less, but currently has %v", len(parsedLines))
 	}
 
 	err := checkContent(parsedLines)
@@ -144,6 +156,7 @@ func checkContent(content [][]string) error {
 	return nil
 }
 
-func toTicks480(noteLength float64, signature engine.Signature) float64 {
-	return 
+func toTicks480(noteLength float64, signature Signature) float64 {
+	// to-do
+	return 0.0
 }

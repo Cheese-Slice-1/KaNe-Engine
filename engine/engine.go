@@ -9,19 +9,6 @@ import (
 	// "github.com/mewkiz/flac"
 )
 
-type NoteType int
-
-const (
-	HalfNote NoteType = 2
-	QuarterNote NoteType = 4
-	EighthNote NoteType = 8
-)
-
-type Signature struct {
-	numerator int
-	denominator NoteType
-}
-
 func Run(project string, singerLocations []string) error {
 	//parse the project file
 	
