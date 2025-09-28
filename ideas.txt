@@ -1,1 +1,8 @@
 samples in flac
+
+testing stitch:
+- get streams
+- decode samples
+- merge them
+- encode them
+- write encoded audio to output.flac
