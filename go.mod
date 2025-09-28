@@ -1,4 +1,4 @@
-module engine
+module github.com/Cheese-Slice-1/KaNe-Go
 
 go 1.25.1
 
