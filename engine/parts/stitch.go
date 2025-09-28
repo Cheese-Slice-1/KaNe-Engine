@@ -1,44 +1,29 @@
 package parts
 
 import (
+	"os"
+	"fmt"
 	// "github.com/go-mix/mix"
-	"github.com/mewkiz/flac"
+	// "github.com/mewkiz/flac"
+	"github.com/eaburns/flac"
 )
 
-func Stitch(args []any) (any, error) {
+func Stitch(paths []string) ([]byte) {
 	// TODO
-	return nil, nil
+	fmt.Println(paths)
+
+	return nil
 }
 
-func StitchDemo(paths []string) ([]int32, error) {
-	var streams []*flac.Stream
-	var audios [][]int32
-	var out []int32
+func StitchDemo(paths []string) {
+	var decodedFiles [][]byte
 
 	for _, path := range paths {
-		stream, err := flac.ParseFile(path)
-
+		file, err := os.Open(path)
 		if err != nil {
-			return nil, err
+
 		}
 
-		streams = append(streams, stream)
+		decoded, metadata, err := flac.Decode(file)
 	}
-
-	for _, stream := range streams {
-		samples, err := getSamples(stream)
-
-		if err != nil {
-			return nil, err
-		}
-
-		audios = append(audios, samples)
-	}
-
-	for _, audio := range audios {
-		out = append(out, audio...)
-	}
-
-	return out, nil
-
 }

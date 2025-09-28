@@ -1,5 +1,8 @@
 samples in flac
 
+use:
+- github.com/mewkiz/flac or github.com/eaburns/flac
+
 testing stitch:
 - get streams
 - decode samples
