@@ -24,6 +24,7 @@ func StitchDemo(paths []string) {
 
 		}
 
-		decoded, metadata, err := flac.Decode(file)
+		decoded, _, err := flac.Decode(file)
+		decodedFiles = append(decodedFiles, decoded)
 	}
 }

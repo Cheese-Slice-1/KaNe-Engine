@@ -1,10 +1,11 @@
 package parts_test
 
 import (
-	"engine/parts"
 	"fmt"
 	"os"
 	"testing"
+
+	"engine/parts"
 )
 
 /*
@@ -24,3 +25,13 @@ func TestStitch(t *testing.T) {
 	os.WriteFile()
 }
 */
+
+func TestStitch(t *testing.T) {
+	files := []string{
+		"C:/Users/loiro/Documents/OpenUtau-win-x64/Singers/uta/あ.flac",
+		"C:/Users/loiro/Documents/OpenUtau-win-x64/Singers/uta/か.flac",
+		"C:/Users/loiro/Documents/OpenUtau-win-x64/Singers/uta/げ.flac",
+	}
+
+	parts.StitchDemo(files)
+}
