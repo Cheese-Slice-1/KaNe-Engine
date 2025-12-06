@@ -1,11 +1,9 @@
-package stitch_test
+package stitch
 
 import (
-	"fmt"
+	//"fmt"
 	"os"
 	"testing"
-
-	"engine/parts"
 )
 
 /*
@@ -33,5 +31,5 @@ func TestStitch(t *testing.T) {
 		"C:/Users/loiro/Documents/OpenUtau-win-x64/Singers/uta/げ.flac",
 	}
 
-	parts.StitchDemo(files)
+	Stitch(files)
 }

@@ -1,7 +1,7 @@
-package parts_test
+package parser
 
 import (
-	"engine/parts"
+	//"engine/parts"
 	"fmt"
 	"testing"
 )
@@ -27,7 +27,7 @@ R:F, a:D4:F, a:C4:16-8, a:E4:16-8;`
 	// 	`
 	// 1 is one quarter note, which is a beat
 
-	res, err := parts.ParseFile(file)
+	res, err := ParseFile(file)
 	if err != nil {
 		// panic(err)
 		t.Fatal(err)

@@ -10,13 +10,13 @@ import (
 type NoteType int
 
 const (
-	HalfNote NoteType = 2
+	HalfNote    NoteType = 2
 	QuarterNote NoteType = 4
-	EighthNote NoteType = 8
+	EighthNote  NoteType = 8
 )
 
 type Signature struct {
-	numerator int
+	numerator   int
 	denominator NoteType
 }
 
@@ -48,9 +48,11 @@ func ParseFile(content string) ([][]string, error) {
 	lines := strings.Split(content, ";")
 
 	var parsedLines [][]string
-	
+
 	for _, line := range lines {
-		if line == "" { continue }
+		if line == "" {
+			continue
+		}
 
 		declarations := strings.Split(line, ",")
 		for j, declaration := range declarations {
@@ -59,7 +61,7 @@ func ParseFile(content string) ([][]string, error) {
 		parsedLines = append(parsedLines, declarations)
 	}
 
-	if len(parsedLines) > 3  {
+	if len(parsedLines) > 3 {
 		return parsedLines, fmt.Errorf("project file must contain 3 lines or less, but currently has %v", len(parsedLines))
 	}
 
@@ -76,7 +78,7 @@ func ParseFile(content string) ([][]string, error) {
 
 func checkContent(content [][]string) error {
 	errorsFound := []string{}
-	
+
 	for i, line := range content {
 		// C4:F, :F, :16-8, r:f/R:F :f2/:F2 C516-8 C4:
 		switch i {
@@ -134,7 +136,7 @@ func checkContent(content [][]string) error {
 				if !strings.Contains(note, ":") {
 					errorsFound = append(errorsFound, fmt.Sprintf("Note %v lacks a separator", j+1))
 				}
-					
+
 				if !strings.ContainsAny(note, "ABCDEFGRabcdefgr0123456789") {
 					if !strings.Contains(note, "R:F") || !strings.Contains(note, "r:f") || !strings.Contains(note, "R:f") || !strings.Contains(note, "r:F") {
 						errorsFound = append(errorsFound, fmt.Sprintf("Note %v lacks either note name or length", j+1))
