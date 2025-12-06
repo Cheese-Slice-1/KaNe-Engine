@@ -1,14 +1,13 @@
-package parts
+package stitch
 
 import (
-	"os"
-	"fmt"
+	fmt "os"
 	// "github.com/go-mix/mix"
 	// "github.com/mewkiz/flac"
 	"github.com/eaburns/flac"
 )
 
-func Stitch(paths []string) ([]byte) {
+func Stitch(paths []string) []byte {
 	// TODO
 	fmt.Println(paths)
 

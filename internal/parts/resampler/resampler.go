@@ -1,7 +1,7 @@
-package parts
+package resampler
 
 import (
-	// "github.com/mewkiz/flac"
+// "github.com/mewkiz/flac"
 )
 
 func ApplyEffect(sample any, effect any) (any, error) {

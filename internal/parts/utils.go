@@ -1,11 +1,12 @@
 package parts
 
 import (
-	"io"
 	"errors"
 	"github.com/mewkiz/flac"
+	"io"
 )
 
+// get the samples from a stream
 func getSamples(stream *flac.Stream) ([]int32, error) {
 	var out []int32
 

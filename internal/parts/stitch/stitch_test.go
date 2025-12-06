@@ -1,4 +1,4 @@
-package parts_test
+package stitch_test
 
 import (
 	"fmt"
