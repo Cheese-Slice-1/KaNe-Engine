@@ -1,0 +1,8 @@
+bpm 120
+sig 4/4
+
+1 defoko {
+    c4, c4
+    1, 1
+    a, a
+}

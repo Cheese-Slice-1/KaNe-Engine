@@ -11,3 +11,7 @@ testing stitch:
 - write encoded audio to output.flac
 
 stitch would take an array of already decoded samples
+
+KaNe's default dir is:
+- "~/.kane/" in linux and (if i ever do it) macOS (so "/home/your-username")
+- "C:\users\your-username\.kane\" in windows (if i don't leave it unsuported out of spite heheheh)

@@ -1,12 +1,10 @@
-package engine_test
+package main
 
 import (
-	"fmt"
-	"os"
-	"engine/parts"
+	"testing"
 )
 
-func TestMain(m *testing.M) {
+func TestEngine(m *testing.M) {
 	// Setup code if needed
 	exitCode := m.Run()
 	// Teardown code if needed

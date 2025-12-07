@@ -2,12 +2,12 @@ package engine
 
 import (
 	. "fmt"
+
 	// "os"
 	"resampler"
 	"stitcher"
 	"strings"
-	// "github.com/go-mix/mix" // NOTE: research later why i have this here
-	// "github.com/mewkiz/flac"
+	//"github.com/go-mix/mix" // NOTE: idk why i have this here
 )
 
 func Run(project string, singerLocations []string) error {
