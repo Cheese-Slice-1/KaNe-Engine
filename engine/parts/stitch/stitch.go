@@ -10,20 +10,20 @@ import (
 	"github.com/eaburns/flac"
 )
 
-func Stitch(streams [][]byte) []byte {
+func Stitch(samples [][]byte) []byte {
 	// TODO: make it care about timing
 
 	// basic ass stitch (does NOT care about timing AT ALL)
-	var stitched = Flatten(streams)
+	var stitched = Flatten(samples)
 	return stitched
 }
 
 func StitchPaths(paths []string) []byte {
-	streams, err := GetStreams(paths) // get streams from different files
+	samples, err := GetSamples(paths) // get streams from different files
 	if err != nil {
-		log.Fatal(err)
-		return nil
+		log.Fatal(err) // WHY			ARE YOU DUMB?
+		return nil     // TODO: fix this piece of SHIT and make it handle error
 	}
 
-	stitched := Flatten(strems)
+	stitched := Flatten(strems) // wow
 }

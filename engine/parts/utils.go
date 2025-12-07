@@ -8,8 +8,15 @@ import (
 	"github.com/eaburns/flac"
 )
 
+type Singer struct {
+	name    string
+	path    string
+	samples map[string][]byte // map[filename]audio
+	alias   map[string]string // map[alias]filename
+}
+
 // get the samples from several files
-func GetStreams(paths []string) ([][]byte, error) {
+func GetSamples(paths []string) ([][]byte, error) {
 	var result [][]byte
 
 	for _, path := range paths {

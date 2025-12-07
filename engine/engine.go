@@ -18,7 +18,7 @@ func Run(project string, singerLocations []string) error {
 		return error
 	}
 
-	singer := parsedProject[1][0]
+	singer := parsedProject[1][0] // TODO: wrong
 
 	loadSinger(singer, singerLocations)
 

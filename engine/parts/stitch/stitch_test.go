@@ -31,8 +31,8 @@ func TestStitch(t *testing.T) {
 		"~/.kane/singers/uta/か.flac", // ka
 		"~/.kane/singers/uta/げ.flac"} // ge
 
-	streams := GetStreams(files) // get streams
+	samples := GetSamples(files) // get streams
 
-	stitched := Stitch(streams)
-	os.WriteFile()
+	stitched := Stitch(samples)
+	os.WriteFile() // TODO: tf does this do? how do i use it? shit
 }
