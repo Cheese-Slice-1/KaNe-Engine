@@ -10,7 +10,7 @@ import (
 func main() {
 	// optionsHelp := map[string]string{"-g": "Gender formant (range: x-y)"}
 
-	args := os.Args[1:]
+	args := os.Args[1:] // get all args EXCEPT
 
 	switch args[0] {
 	case "-h", "--help", "help", "-?", "?":

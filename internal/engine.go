@@ -3,19 +3,19 @@ package engine
 import (
 	. "fmt"
 	// "os"
-	"engine/parts"
+	"resampler"
+	"stitcher"
 	"strings"
-	// "github.com/go-mix/mix"
+	// "github.com/go-mix/mix" // NOTE: research later why i have this here
 	// "github.com/mewkiz/flac"
 )
 
 func Run(project string, singerLocations []string) error {
 	//parse the project file
-	
-	parsedProject, err := parts.ParseFile(project)
 
+	parsedProject, err := parser.ParseFile(project)
 	if err != nil {
-		panic("Project contains one or more problems:\n" + err.Error())
+		return error
 	}
 
 	singer := parsedProject[1][0]

@@ -1,31 +1,31 @@
-package stitch
+package stitcher
 
 import (
 	"fmt"
+	"log"
 	"os"
+	. "utils"
+
 	// "github.com/go-mix/mix"
 	// "github.com/mewkiz/flac"
+	"github.com/Cheese-Slice-1/KaNe-Engine/internal/parts"
 	"github.com/eaburns/flac"
 )
 
-//func Stitch(paths []string) []byte {
-//	// TODO
-//	fmt.Println(paths)
-//
-//	return nil
-//}
+func Stitch(streams [][]byte) []byte {
+	// TODO: make it care about timing
 
-func Stitch(paths []string) {
-	var decodedFiles []byte
+	// basic ass stitch (does NOT care about timing AT ALL)
+	var stitched = Flatten(streams)
+	return stitched
+}
 
-	for _, path := range paths {
-		file, err := os.Open(path)
-		if err != nil {
-			fmt.Println("Error encountered: ", err)
-			return
-		}
-
-		decoded, _, err := flac.Decode(file)
-		decodedFiles = append(decodedFiles, decoded...)
+func StitchPaths(paths []string) []byte {
+	streams, err := GetStreams(paths) // get streams from different files
+	if err != nil {
+		log.Fatal(err)
+		return nil
 	}
+
+	stitched := Flatten(strems)
 }

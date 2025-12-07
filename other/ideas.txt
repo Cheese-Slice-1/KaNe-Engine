@@ -1,7 +1,7 @@
 samples in flac
 
 use:
-- github.com/mewkiz/flac or github.com/eaburns/flac
+- github.com/eaburns/flac
 
 testing stitch:
 - get streams
@@ -9,3 +9,5 @@ testing stitch:
 - merge them
 - encode them
 - write encoded audio to output.flac
+
+stitch would take an array of already decoded samples

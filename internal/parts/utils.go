@@ -1,29 +1,38 @@
-package parts
+package utils
 
 import (
 	"errors"
-	"github.com/mewkiz/flac"
 	"io"
+	"os"
+
+	"github.com/eaburns/flac"
 )
 
-// get the samples from a stream
-func getSamples(stream *flac.Stream) ([]int32, error) {
-	var out []int32
+// get the samples from several files
+func GetStreams(paths []string) ([][]byte, error) {
+	var result [][]byte
 
-	for {
-		frame, err := stream.ParseNext()
-
+	for _, path := range paths {
+		file, err := os.Open(path)
 		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			return nil, errors.New("unable to parse audio frame from FLAC stream")
+			return nil, err
 		}
 
-		for _, subFrame := range frame.Subframes {
-			out = append(out, subFrame.Samples...)
+		content, _, err := flac.Decode(file)
+		if err != nil {
+			return nil, err
 		}
+
+		result = append(result, content)
 	}
 
-	return out, nil
+	return result, nil
+}
+
+func Flatten(arrays [][]any) []any {
+	var result []any
+	for _, array := range arrays {
+		result = append(result, array...)
+	}
+	return result
 }
